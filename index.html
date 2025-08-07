@@ -58,9 +58,14 @@
       "https://beige.party/",
       "https://mstdn.party/"
     ];
-    
-    for (const url of urls) {
-      window.open(url, '_blank');
+
+    // Open each URL in a new tab *synchronously*
+    for (let i = 0; i < urls.length; i++) {
+      const win = window.open(urls[i], '_blank');
+      if (!win) {
+        alert("Popup blocked. Please allow popups for this site.");
+        break;
+      }
     }
   }
 </script>
