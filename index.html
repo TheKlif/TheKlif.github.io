@@ -29,8 +29,42 @@
     a:hover {
       text-decoration: underline;
     }
+    button {
+      background-color: #333;
+      color: #f0f0f0;
+      border: none;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      cursor: pointer;
+      margin-bottom: 1em;
+    }
+    button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
+
+<script>
+  function openAllLinks() {
+    const urls = [
+      "https://calendar.google.com",
+      "https://mail.google.com",
+      "https://www.messenger.com",
+      "https://www.inoreader.com/all_articles",
+      "https://trakt.tv/users/klif/progress/watched/recently-aired",
+      "https://liteblue.usps.gov/wps/myportal/apps",
+      "https://chat.openai.com",
+      "https://app.todoist.com/",
+      "https://beige.party/",
+      "https://mstdn.party/"
+    ];
+    
+    for (const url of urls) {
+      window.open(url, '_blank');
+    }
+  }
+</script>
+  
 <body>
   <div class="links">
     <a href="https://calendar.google.com" target="_blank">calendar</a><br>
@@ -46,6 +80,7 @@
     <!-- <a href="https://example.com" target="_blank">example</a><br> -->
     <!-- <a href="https://another.com" target="_blank">another link</a><br> -->
     <!-- <a href="https://newsite.com" target="_blank">new site</a><br> -->
+    <button onclick="openAllLinks()">Open All Links</button>
   </div>
 </body>
 </html>
