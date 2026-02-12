@@ -1,4 +1,10 @@
+---
+layout: character
+title: Caius Verity
+---
+
 ![[Caius Verity screenshot.png]]
+
 Meet Caius Verity, the transparent rogue. He’s the sort of man who announces, mid-step, “I’m about to pick your pocket,” and somehow makes it charming enough that the victim forgets to be alarmed. At a noble’s banquet, he might lean over a gilded railing, grin at the distracted guard, and say, “I’ll be rifling your coin purse while your back is turned. Consider it an exercise in trust.” And then he does exactly that, hands light, eyes sparkling, leaving the guard embarrassed, annoyed, and mildly impressed. Caius thrives in the spotlight, his mischief wrapped in honesty, turning expectation itself into a weapon.
 
 Physically, he dresses like someone you’d notice in any crowd but never fear. A tailored longcoat sweeps his movements, gloves immaculate, pocket watch ticking audibly, dagger sheathed plainly at his side more as punctuation than threat. Every object around him becomes a potential tool -- tankards, candlesticks, rugs, ledger books -- and he wields them with the same flair and precision he uses to wield attention. In combat, he doesn’t vanish into shadows; he steps forward, announces each move, shoves a chair, hurls a book, directs his allies with perfectly timed cues, and makes the battlefield his stage.
