@@ -14,8 +14,10 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $slug  = $slug.ToLower()
 
     $output = Join-Path $targetDir ($slug + ".html")
-    pandoc $_.FullName -o $output --css="/Is-This-Anything/style.css"
-}
+pandoc $_.FullName -o $output `
+    --css="/Is-This-Anything/style.css" `
+    --include-before-body="Is-This-Anything/_header.html" `
+    --include-after-body="Is-This-Anything/_footer.html"}
 
 # Auto index (grouped)
 $index = @"

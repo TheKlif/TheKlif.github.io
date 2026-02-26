@@ -1,0 +1,3 @@
+<footer>
+  <a href="/Is-This-Anything/index.html">All Notes</a>
+</footer>
