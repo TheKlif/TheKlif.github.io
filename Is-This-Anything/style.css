@@ -4,7 +4,7 @@ header strong {
 }
 
 body {
-  max-width: 600px;
+  max-width: 600px;   /* make 700 or 800 if too narrow */
   margin: 0 auto;
   padding: 1em;
   background: #121212;
