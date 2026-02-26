@@ -3,6 +3,7 @@
 $source = "D:\Obsidian\Klif-Brain\Publish"
 $site   = ".\Is-This-Anything"
 
+# Convert markdown to HTML (slugified, lowercase)
 Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $relative = $_.FullName.Substring($source.Length + 1)
     $dir      = Split-Path $relative
@@ -16,7 +17,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     pandoc $_.FullName -o $output --css="../style.css"
 }
 
-# Build index grouped by folder
+# Build auto index (group by folder, safe relative logic)
 $index = @"
 <!DOCTYPE html>
 <html lang='en'>
@@ -34,15 +35,18 @@ $groups = @{}
 Get-ChildItem -Path $site -Recurse -Include "*.html" |
     Where-Object { $_.Name -ne "index.html" } |
     ForEach-Object {
-        $folder = Split-Path $_.FullName -Parent
-        $relFolder = $folder.Substring((Resolve-Path $site).Path.Length + 1).Trim("\").ToLower()
-        if ($relFolder -eq "") { $relFolder = "uncategorized" }
-        if (-not $groups.ContainsKey($relFolder)) { $groups[$relFolder] = @() }
+        $full = $_.FullName
+        $baseSite = (Resolve-Path $site).Path
 
-        $rel = $_.FullName.Substring((Resolve-Path $site).Path.Length + 1).Replace("\", "/")
+        $rel = $full.Substring($baseSite.Length).TrimStart("\").Replace("\", "/")
+        $folder = Split-Path $rel -Parent
+        if ([string]::IsNullOrWhiteSpace($folder)) { $folder = "uncategorized" }
+
+        if (-not $groups.ContainsKey($folder)) { $groups[$folder] = @() }
+
         $title = $_.BaseName -replace '-', ' '
         $title = (Get-Culture).TextInfo.ToTitleCase($title)
-        $groups[$relFolder] += "<li><a href='$rel'>$title</a></li>"
+        $groups[$folder] += "<li><a href='$rel'>$title</a></li>"
     }
 
 foreach ($group in $groups.GetEnumerator()) {
