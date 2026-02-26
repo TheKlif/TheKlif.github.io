@@ -1,14 +1,12 @@
-# Publish script with Markdown support
+# Publish script (simple markdown conversion)
 
 Get-ChildItem -Path ".\Publish" -Recurse -Include "*.md" | ForEach-Object {
-    $relative = $_.FullName.Substring((Resolve-Path ".\Publish").Path.Length + 1)
-    $targetDir = Join-Path ".\Is-This-Anything" (Split-Path $relative)
-    if (!(Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir }
-    $output = Join-Path $targetDir ($_.BaseName + ".html")
-    pandoc $_.FullName -o $output
+     = .FullName.Substring((Resolve-Path ".\Publish").Path.Length + 1)
+     = Join-Path ".\Is-This-Anything" (Split-Path )
+    if (!(Test-Path )) { New-Item -ItemType Directory -Path  }
+     = Join-Path  (.BaseName + ".html")
+    pandoc .FullName -o 
 }
-
-Copy-Item -Path ".\Publish\*.html" -Destination ".\Is-This-Anything\" -Recurse -Force -ErrorAction SilentlyContinue
 
 git add .
 git commit -m "publish update"
