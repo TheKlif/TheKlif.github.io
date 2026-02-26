@@ -1,13 +1,16 @@
-# Publish script (external Obsidian + slugified filenames)
+# Publish script (external Obsidian + slugified filenames + lowercase directories)
 
 $source = "D:\Obsidian\Klif-Brain\Publish"
 
 Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $relative = $_.FullName.Substring($source.Length + 1)
-    $targetDir = Join-Path ".\Is-This-Anything" (Split-Path $relative)
+    $dir = Split-Path $relative
+
+    # lowercase directory path
+    $targetDir = Join-Path ".\Is-This-Anything" ($dir.ToLower())
     if (!(Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir }
 
-    # slugify filename: remove extension, replace spaces with hyphens, lowercase
+    # slugify filename (no spaces, lowercase)
     $slug = $_.BaseName -replace ' ', '-'
     $slug = $slug.ToLower()
 
