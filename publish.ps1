@@ -1,16 +1,14 @@
-# Publish script (external Obsidian + slugified filenames + lowercase directories)
+# Publish script (markdown + auto index, minimal dark)
 
-$source = "D:\Obsidian\Klif-Brain\Publish"
+$site = ".\Is-This-Anything"
 
-Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
-    $relative = $_.FullName.Substring($source.Length + 1)
+# Convert markdown to HTML (slugified, lowercase)
+Get-ChildItem -Path "D:\Obsidian\Klif-Brain\Publish" -Recurse -Include "*.md" | ForEach-Object {
+    $relative = $_.FullName.Substring("D:\Obsidian\Klif-Brain\Publish".Length + 1)
     $dir = Split-Path $relative
-
-    # lowercase directory path
-    $targetDir = Join-Path ".\Is-This-Anything" ($dir.ToLower())
+    $targetDir = Join-Path $site ($dir.ToLower())
     if (!(Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir }
 
-    # slugify filename (no spaces, lowercase)
     $slug = $_.BaseName -replace ' ', '-'
     $slug = $slug.ToLower()
 
@@ -18,6 +16,38 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     pandoc $_.FullName -o $output
 }
 
+# Auto index (minimal, dark)
+$index = @"
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>All Musings</title>
+  <link rel='stylesheet' href='../style.css'>
+</head>
+<body>
+  <h1>All Musings</h1>
+  <ul>
+"@
+
+Get-ChildItem -Path $site -Recurse -Include "*.html" |
+    Where-Object { $_.Name -ne "index.html" } |
+    ForEach-Object {
+        $rel = $_.FullName.Substring((Resolve-Path $site).Path.Length + 1).Replace("\", "/")
+        $title = $_.BaseName -replace '-', ' '
+        $title = (Get-Culture).TextInfo.ToTitleCase($title)
+        $index += "    <li><a href='$rel'>$title</a></li>`n"
+    }
+
+$index += @"
+  </ul>
+</body>
+</html>
+"@
+
+Set-Content "$site/index.html" $index
+
+# Git publish
 git add .
 git commit -m "publish update"
 git push
