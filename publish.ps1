@@ -15,13 +15,13 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     $output = Join-Path $targetDir ($slug + ".html")
 
-(Get-Content $_.FullName) -replace '!\[(.*?)\]\(([^)]+)\)', '![$1](attachments/$2)' |
+(Get-Content $_.FullName) -replace '!\[(.*?)\]\(((?!attachments/)[^)]+)\)', '![$1](attachments/$2)' |
 Set-Content $_.FullName
 
 pandoc $_.FullName -o $output `
     --css="/Is-This-Anything/style.css" `
     --resource-path="." `
-    --metadata title="Is This Anything: $title" `
+    --metadata title="$title" `
     --include-before-body="Is-This-Anything/_header.html" `
     --include-after-body="Is-This-Anything/_footer.html"
 }
