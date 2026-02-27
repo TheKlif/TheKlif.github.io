@@ -25,3 +25,15 @@ footer {
   font-size: 0.9rem;
   color: #888;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+blockquote {
+  border-left: 4px solid #2ecc71;
+  padding: 1rem;
+  background: #1f2b22;
+  border-radius: 6px;
+}
