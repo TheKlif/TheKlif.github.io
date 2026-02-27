@@ -20,11 +20,20 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
 
-    # convert info callout to pandoc div block
-    $content = $content -replace '^\s*>\s*\[!info\]\s*(.*)', "::: {.info}`n**`$1**"
-    $content = $content -replace '^\s*>\s*(.*)', '$1'
-    $content = $content -replace '(\*\*.*?\*\*)\r?\n(?=\S)', "`$1`n"
-    $content += "`n:::"
+    # Convert Obsidian [!info] callouts to Pandoc div blocks
+    $pattern = '(?ms)^\s*>\s*\[!info\]\s*(.*?)\r?\n((?:\s*>\s*.*\r?\n?)*)'
+
+    $content = [regex]::Replace($content, $pattern, {
+        param($match)
+
+        $title = $match.Groups[1].Value.Trim()
+        $body  = $match.Groups[2].Value
+
+        # remove leading ">" from body lines
+        $body = $body -replace '^\s*>\s?', '' -replace '(?m)^\s*>\s?', ''
+
+        return "::: {.info}`n**$title**`n$body`n:::"
+    })
 
     # write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
