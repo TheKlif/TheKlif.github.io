@@ -20,10 +20,12 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
 
-    # remove callout marker line (two-line form)
-    $content = $content -replace '^\s*>\s*\[\!\w+\]\s*$', ''
-    # render next line as title
-    $content = $content -replace '^\s*>\s*(.*)', '> **$1**'
+    # remove callout marker
+    $content = $content -replace '^\s*>\s*\[\!\w+\]\s*.*$', ''
+
+    # bold first line only
+    $content = $content -replace '^\s*>\s*(.*)$', '> **$1**'
+    $content = $content -replace '^\s*>\s*(?!\*\*)(.*)$', '> $1'
 
     # Write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
