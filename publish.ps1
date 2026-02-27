@@ -29,7 +29,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $title = $match.Groups[1].Value.Trim()
     $body  = $match.Groups[2].Value
 
-    # remove leading ">" from each body line
+    # strip leading '>' from every body line
     $body = $body -replace '(?m)^\s*>\s?', ''
 
     return "`n::: {.info}`n`n**$title**`n`n$body`n:::`n"
