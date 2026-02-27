@@ -16,6 +16,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $output = Join-Path $targetDir ($slug + ".html")
 pandoc $_.FullName -o $output `
     --css="/Is-This-Anything/style.css" `
+    --resource-path="." `
     --include-before-body="Is-This-Anything/_header.html" `
     --include-after-body="Is-This-Anything/_footer.html"
 }
