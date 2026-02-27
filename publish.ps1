@@ -58,8 +58,9 @@ Get-ChildItem -Path $site -Recurse -Include "*.html" |
         $groups[$folder] += "<li><a href='$rel'>$title</a></li>"
     }
 
-foreach ($group in $groups.GetEnumerator()) {
-    $index += "<h2>$($group.Key)</h2><ul>`n"
+foreach ($group in ($groups.GetEnumerator() | Sort-Object Name)) {
+    $heading = (Get-Culture).TextInfo.ToTitleCase($group.Key)
+    $index += "<h2>$heading</h2><ul>`n"
     $index += ($group.Value -join "`n")
     $index += "`n</ul>`n"
 }
