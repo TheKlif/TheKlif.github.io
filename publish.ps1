@@ -13,6 +13,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $slug  = $_.BaseName -replace ' ', '-'
     $slug  = $slug.ToLower()
 
+    $title = $_.BaseName
+    
     $output = Join-Path $targetDir ($slug + ".html")
 
     # Read markdown (do not modify source)
