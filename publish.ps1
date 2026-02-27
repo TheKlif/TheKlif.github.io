@@ -24,16 +24,16 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $pattern = '(?ms)^\s*>\s*\[!info\]\s*(.*?)\r?\n((?:\s*>\s*.*\r?\n?)*)'
 
     $content = [regex]::Replace($content, $pattern, {
-        param($match)
+    param($match)
 
-        $title = $match.Groups[1].Value.Trim()
-        $body  = $match.Groups[2].Value
+    $title = $match.Groups[1].Value.Trim()
+    $body  = $match.Groups[2].Value
 
-        # remove leading ">" from body lines
-        $body = $body -replace '^\s*>\s?', '' -replace '(?m)^\s*>\s?', ''
+    # remove leading ">" from each body line
+    $body = $body -replace '(?m)^\s*>\s?', ''
 
-        return "::: {.info}`n**$title**`n$body`n:::"
-    })
+    return "`n::: {.info}`n`n**$title**`n`n$body`n:::`n"
+})
 
     # write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
