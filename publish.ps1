@@ -15,12 +15,24 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     $output = Join-Path $targetDir ($slug + ".html")
 
-pandoc $_.FullName -o $output `
-    --css="/Is-This-Anything/style.css" `
-    --resource-path="." `
-    --metadata title="$title" `
-    --include-before-body="Is-This-Anything/_header.html" `
-    --include-after-body="Is-This-Anything/_footer.html"
+    # Read markdown (do not modify source)
+    $content = Get-Content $_.FullName -Raw
+
+    # Transform callouts:
+    # > [!info] Title  ->  > **Title**
+    # > [!warning] X   ->  > **X**
+    $content = $content -replace '^\>\s*\[!\w+\]\s*(.*)', '> **$1**'
+
+    # Write to temp file for pandoc
+    $temp = "$env:TEMP\publish_temp.md"
+    Set-Content $temp $content
+
+    pandoc $temp -o $output `
+        --css="/Is-This-Anything/style.css" `
+        --resource-path="." `
+        --metadata title="$title" `
+        --include-before-body="Is-This-Anything/_header.html" `
+        --include-after-body="Is-This-Anything/_footer.html"
 }
 
 # Auto index (grouped)
@@ -86,8 +98,12 @@ Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-
     Copy-Item -Path (Join-Path $_.FullName '*') -Destination $dest -Recurse -Force
 }
 
-git add .
-git commit -m "publish update"
-git push
+if ($LASTEXITCODE -eq 0) {
+    git add .
+    git commit -m $COMMITMSG
+    git push
+} else {
+    Write-Host "Publish failed; not committing."
+}
 
 Write-Host "Publish complete."
