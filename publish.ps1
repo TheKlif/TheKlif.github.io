@@ -15,9 +15,6 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     $output = Join-Path $targetDir ($slug + ".html")
 
-(Get-Content $_.FullName) -replace '!\[(.*?)\]\(((?!attachments/)[^)]+)\)', '![$1](attachments/$2)' |
-Set-Content $_.FullName
-
 pandoc $_.FullName -o $output `
     --css="/Is-This-Anything/style.css" `
     --resource-path="." `
