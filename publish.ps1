@@ -24,7 +24,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $content = $content -replace '^\s*>\s*\[!\w+\]\s*', '> '
 
     # split first and second lines into separate paragraphs
-    $content = $content -replace '^\s*>\s*(.*)\r?\n>\s*(.*)', '> **$1**`n>`n> $2'
+    $content = $content -replace '^\s*>\s*(.+)\r?\n>\s*(.+)', "> **`$1**`n>`n> `$2"
 
     # write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
