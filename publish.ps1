@@ -21,6 +21,7 @@ Set-Content $_.FullName
 pandoc $_.FullName -o $output `
     --css="/Is-This-Anything/style.css" `
     --resource-path="." `
+    --metadata title="Is This Anything: $title" `
     --include-before-body="Is-This-Anything/_header.html" `
     --include-after-body="Is-This-Anything/_footer.html"
 }
