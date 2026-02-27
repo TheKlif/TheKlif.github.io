@@ -17,7 +17,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 pandoc $_.FullName -o $output `
     --css="/Is-This-Anything/style.css" `
     --include-before-body="Is-This-Anything/_header.html" `
-    --include-after-body="Is-This-Anything/_footer.html"}
+    --include-after-body="Is-This-Anything/_footer.html"
+}
 
 # Auto index (grouped)
 $index = @"
@@ -63,6 +64,18 @@ $index += @"
 "@
 
 Set-Content "$site/index.html" $index
+
+# Copy attachment folders from source to site
+Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-Object {
+    $relative = $_.FullName.Substring($source.Length + 1)
+    $dest = Join-Path $site $relative
+
+    if (!(Test-Path $dest)) {
+        New-Item -ItemType Directory -Path $dest -Force
+    }
+
+    Copy-Item -Path $_.FullName\* -Destination $dest -Recurse -Force
+}
 
 git add .
 git commit -m "publish update"
