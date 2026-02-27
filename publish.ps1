@@ -20,8 +20,11 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
 
-    # remove callout marker only
-    $content = $content -replace '^\s*>\s*\[!\w+\]\s*', '> '
+    # convert info callout to pandoc div block
+    $content = $content -replace '^\s*>\s*\[!info\]\s*(.*)', "::: {.info}`n**`$1**"
+    $content = $content -replace '^\s*>\s*(.*)', '$1'
+    $content = $content -replace '(\*\*.*?\*\*)\r?\n(?=\S)', "`$1`n"
+    $content += "`n:::"
 
     # write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
