@@ -74,7 +74,7 @@ Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-
         New-Item -ItemType Directory -Path $dest -Force
     }
 
-    Copy-Item -Path $_.FullName\* -Destination $dest -Recurse -Force
+    Copy-Item -Path (Join-Path $_.FullName '*') -Destination $dest -Recurse -Force
 }
 
 git add .
