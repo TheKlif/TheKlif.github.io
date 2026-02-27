@@ -37,3 +37,10 @@ blockquote {
   background: #1f2b22;
   border-radius: 6px;
 }
+
+.info {
+  border-left: 4px solid #2ecc71;
+  padding: 1rem;
+  background: #1f2b22;
+  border-radius: 6px;
+}
