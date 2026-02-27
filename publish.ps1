@@ -13,8 +13,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $slug  = $_.BaseName -replace ' ', '-'
     $slug  = $slug.ToLower()
 
-    $title = $_.BaseName
-    
+    $title = "$($_.BaseName) - Is This Anything?"
+
     $output = Join-Path $targetDir ($slug + ".html")
 
     # Read markdown (do not modify source)
@@ -23,7 +23,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     # Transform callouts:
     # > [!info] Title  ->  > **Title**
     # > [!warning] X   ->  > **X**
-    $content = $content -replace '^\>\s*\[!\w+\]\s*(.*)', '> **$1**'
+    $content = $content -replace '^\s*>\s*\[\!\w+\]\s*(.*)', '> **$1**'
 
     # Write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
