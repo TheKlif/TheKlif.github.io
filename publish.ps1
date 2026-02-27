@@ -59,6 +59,11 @@ Get-ChildItem -Path $site -Recurse -Include "*.html" |
     }
 
 foreach ($group in ($groups.GetEnumerator() | Sort-Object Name)) {
+
+    if ($group.Key -eq "uncategorized") {
+        continue
+    }
+
     $heading = (Get-Culture).TextInfo.ToTitleCase($group.Key)
     $index += "<h2>$heading</h2><ul>`n"
     $index += ($group.Value -join "`n")
