@@ -40,25 +40,16 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     # write to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
-    Set-Content $temp $content
-
-    Write-Host "Temp markdown path: $temp"
-
-    Write-Host "----- FIRST 20 LINES OF TEMP FILE -----"
-    Get-Content $temp
-    Write-Host "---------------------------------------"
 
     Push-Location $source
 
-    pandoc $temp -o $output `
-        --from=markdown+implicit_figures `
+    pandoc "$_.FullName" -o $output `
+        --from=markdown `
         --standalone `
-        --css="/Is-This-Anything/style.css" `
         --resource-path="$source" `
-        --extract-media="$targetDir" `
         --metadata title="$title" `
         --include-before-body="$site\_header.html" `
-        --include-after-body="$site\_footer.html" `
+        --include-after-body="$site\_footer.html"
 
     Pop-Location
 }
