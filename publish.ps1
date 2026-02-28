@@ -52,7 +52,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         --from=markdown `
         --standalone `
         --css="/Is-This-Anything/style.css" `
-        --resource-path="." `
+        --resource-path="$source" `
         --metadata title="$title" `
         --include-before-body="Is-This-Anything/_header.html" `
         --include-after-body="Is-This-Anything/_footer.html"
