@@ -20,6 +20,9 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
 
+    # Ensure a blank line before any heading that follows content (like images)
+    $content = $content -replace "(\!\[.*?\]\(.*?\))\r?\n(#)", "$1`n`n$2"
+
     # Convert Obsidian [!info] callouts to Pandoc div blocks
     $pattern = '(?ms)^\s*>\s*\[!info\]\s*(.*?)\r?\n((?:\s*>\s*.*\r?\n?)*)'
 
