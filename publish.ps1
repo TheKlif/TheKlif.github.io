@@ -40,6 +40,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     Set-Content $temp $content
 
     pandoc $temp -o $output `
+        --from=markdown `
+        --standalone `
         --css="/Is-This-Anything/style.css" `
         --resource-path="." `
         --metadata title="$title" `
