@@ -48,6 +48,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     Get-Content $temp -TotalCount 20
     Write-Host "---------------------------------------"
 
+    Push-Location $source
+
     pandoc $temp -o $output `
         --from=markdown `
         --standalone `
@@ -57,6 +59,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         --metadata title="$title" `
         --include-before-body="Is-This-Anything/_header.html" `
         --include-after-body="Is-This-Anything/_footer.html"
+
+    Pop-Location
 }
 
 # Auto index (grouped)
