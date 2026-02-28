@@ -19,6 +19,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
+    Write-Host "Processing file: $($_.FullName)"
 
     # Ensure a blank line before any heading that follows content (like images)
     $content = $content -replace "(\!\[.*?\]\(.*?\))\r?\n(#)", "$1`n`n$2"
