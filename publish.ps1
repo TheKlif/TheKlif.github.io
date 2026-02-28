@@ -51,7 +51,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     Push-Location $source
 
     pandoc $temp -o $output `
-        --from=markdown `
+        --from=markdown+implicit_figures `
         --standalone `
         --css="/Is-This-Anything/style.css" `
         --resource-path="$source" `
