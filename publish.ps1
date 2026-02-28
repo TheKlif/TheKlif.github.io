@@ -55,7 +55,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         --standalone `
         --css="/Is-This-Anything/style.css" `
         --resource-path="$source" `
-        --extract-media="$site" `
+        --extract-media="$targetDir" `
         --metadata title="$title" `
         --include-before-body="$site\_header.html" `
         --include-after-body="$site\_footer.html" `
