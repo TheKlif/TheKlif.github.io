@@ -19,6 +19,10 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     # Read markdown (do not modify source)
     $content = Get-Content $_.FullName -Raw
+
+    # force blank line between image and heading
+    $content = $content -replace "(\!\[.*?\]\(.*?\))\s*#","$1`n`n#"
+    
     Write-Host "Processing file: $($_.FullName)"
 
     # (blank line normalization disabled for troubleshooting)
@@ -45,7 +49,6 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     pandoc $_.FullName -o $output `
         --standalone `
-        --resource-path="$source" `
         --metadata title="$title" `
         --include-before-body="$site\_header.html" `
         --include-after-body="$site\_footer.html"
