@@ -39,6 +39,12 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $temp = "$env:TEMP\publish_temp.md"
     Set-Content $temp $content
 
+    Write-Host "Temp markdown path: $temp"
+
+    Write-Host "----- FIRST 20 LINES OF TEMP FILE -----"
+    Get-Content $temp -TotalCount 20
+    Write-Host "---------------------------------------"
+
     pandoc $temp -o $output `
         --from=markdown `
         --standalone `
