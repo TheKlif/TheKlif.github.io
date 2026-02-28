@@ -44,7 +44,6 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     Push-Location $source
 
     pandoc $_.FullName -o $output `
-        --from=markdown `
         --standalone `
         --resource-path="$source" `
         --metadata title="$title" `
