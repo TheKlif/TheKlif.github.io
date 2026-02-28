@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Klif's Start Page</title>
-  <style>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Klif's Start Page</title>
+    <style>
     body {
       background-color: #121212;
-      color: #f0f0f0;
-      margin: 0;
-      padding: 2em;
-      font-family: sans-serif;
+      color: #e0e0e0;
+      margin: 0 auto;
+      padding: 1em;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       display: flex;
       flex-wrap: wrap; /* Allows columns to wrap on small screens */
       justify-content: center; /* Center columns horizontally */
@@ -32,6 +34,7 @@
     }
     a:hover {
       text-decoration: underline;
+      color: #8ab4f8;
     }
     button {
       background-color: #333;
@@ -56,9 +59,7 @@
       }
     }
   </style>
-</head>
-
-<script>
+    <script>
   function openAllLinksLeft() {
     const urls = [
       "https://mail.google.com",
@@ -89,35 +90,39 @@
     }
   }
 </script>
-  
-<body>
-  <!-- Left column -->
-  <div class="links">
-    <a href="https://mail.google.com" target="_blank">gmail</a><br>
-    <a href="https://www.inoreader.com/all_articles" target="_blank">inoreader</a><br>
-    <a href="https://app.todoist.com/" target="_blank">todoist</a><br>
-    <button onclick="openAllLinksLeft()">Open 3 Links</button>
-    <div class="spacer"></div>
-    <a href="https://calendar.google.com" target="_blank">calendar</a><br>
-    <a href="https://www.messenger.com" target="_blank">messenger</a><br>
-    <a href="https://trakt.tv/users/klif/progress/watched/recently-aired" target="_blank">trakt</a><br>
-    <a href="https://liteblue.usps.gov/wps/myportal/apps" target="_blank">liteblue</a><br>
-    <a href="https://chat.openai.com" target="_blank">chatgpt</a><br>
-    <div class="spacer"></div>
-    <a href="https://beige.party/" target="_blank">mastodon - Klif</a><br>
-    <a href="https://mstdn.party/" target="_blank">mastodon - tuto</a><br>
-    <!-- <a href="https://example.com" target="_blank">example</a><br> -->
-    <!-- <a href="https://another.com" target="_blank">another link</a><br> -->
-    <!-- <a href="https://newsite.com" target="_blank">new site</a><br> -->
-  </div>
-
-  <!-- Right column -->
-  <div class="links">
-    <a href="https://raddle.quest/" target="_blank">raddle</a><br>
-    <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">wordle</a><br>
-    <a href="https://www.puzzmo.com/today/" target="_blank">puzzmo</a><br>
-    <!-- <a href="https://www.duolingo.com/learn" target="_blank">duolingo</a><br> -->
-    <button onclick="openAllLinksRight()">Open 3 Links</button>
-  </div>
-</body>
+  </head>
+  <body>
+    <!-- Left column -->
+    <div class="links"> <a href="https://mail.google.com"
+        target="_blank">Gmail</a><br>
+      <a href="https://app.todoist.com/" target="_blank">Todoist</a><br>
+      <br>
+      <a href="https://calendar.google.com" target="_blank">Calendar</a><br>
+      <a href="https://www.messenger.com" target="_blank">Messenger</a><br>
+      <a
+        href="https://trakt.tv/users/klif/progress/watched/recently-aired"
+        target="_blank">Trakt</a><br>
+      <a href="https://liteblue.usps.gov/wps/myportal/apps"
+        target="_blank">LiteBlue</a><br>
+      <a href="https://chat.openai.com" target="_blank">ChatGPT</a><br>
+      <div class="spacer"></div>
+      <br>
+      <!-- <a href="https://example.com" target="_blank">example</a><br> -->
+      <!-- <a href="https://another.com" target="_blank">another link</a><br> -->
+      <!-- <a href="https://newsite.com" target="_blank">new site</a><br> -->
+    </div>
+    <!-- Right column -->
+    <div class="links"> <a
+        href="https://www.nytimes.com/games/wordle/index.html"
+        target="_blank">Wordle</a><br>
+      <a href="https://www.puzzmo.com/today/" target="_blank">Puzzmo</a><br>
+      <br>
+      <a href="https://theklif.github.io/Is-This-Anything/">Is This
+        Anything?</a><br>
+      <br>
+      <a href="https://beige.party/" target="_blank">Mastodon - Klif</a><br>
+      <a href="https://mstdn.party/" target="_blank">Mastodon - tuto</a><br>
+      <!-- <a href="https://www.duolingo.com/learn" target="_blank">duolingo</a><br> -->
+    </div>
+  </body>
 </html>
