@@ -49,6 +49,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 
     pandoc $_.FullName -o $output `
         --standalone `
+        --css="../../style.css" `
         --metadata title="$title" `
         --include-before-body="$site\_header.html" `
         --include-after-body="$site\_footer.html" `
