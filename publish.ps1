@@ -1,7 +1,7 @@
 # Publish script (markdown + auto index + dark styling)
 
 $source = "D:\Obsidian\Klif-Brain\Publish"
-$site   = ".\Is-This-Anything"
+$site   = "D:\Is This Anything\TheKlif.github.io\Is-This-Anything"
 
 # Convert markdown to HTML (slugified, lowercase)
 Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
@@ -57,8 +57,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         --resource-path="$source" `
         --extract-media="$site" `
         --metadata title="$title" `
-        --include-before-body="$site/_header.html" `
-        --include-after-body="$site/_footer.html"
+        --include-before-body="$site\_header.html" `
+        --include-after-body="$site\_footer.html" `
 
     Pop-Location
 }
