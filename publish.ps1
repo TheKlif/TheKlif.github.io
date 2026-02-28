@@ -45,7 +45,7 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     Write-Host "Temp markdown path: $temp"
 
     Write-Host "----- FIRST 20 LINES OF TEMP FILE -----"
-    Get-Content $temp -TotalCount 20
+    Get-Content $temp
     Write-Host "---------------------------------------"
 
     Push-Location $source
