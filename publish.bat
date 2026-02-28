@@ -13,6 +13,12 @@ if %errorlevel% neq 0 (
 
 git add .
 
+if not defined COMMITMSG (
+    echo You must enter a reason.
+    pause
+    exit /b
+)
+
 if "%COMMITMSG%"=="" (
     echo You must enter a reason.
     pause
