@@ -1,8 +1,8 @@
 # Publish script (markdown + auto index + dark styling)
-$source = "D:\Obsidian\Klif-Brain\50.08 - Is This Anything\Publish"
+$source = "D:\Obsidian\Klif-Brain\50 - Hobbies & Interests\50.08 - Is This Anything\Publish"
 $site   = "D:\Is This Anything\TheKlif.github.io\Is-This-Anything"
 $backup = "D:\Is This Anything\Backups"
-$published = "D:\Obsidian\Klif-Brain\50.08 - Is This Anything\Published"
+$published = "D:\Obsidian\Klif-Brain\50 - Hobbies & Interests\50.08 - Is This Anything\Published"
 $COMMITMSG = $env:COMMITMSG
 
 # Backup before doing anything
