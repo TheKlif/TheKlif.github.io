@@ -130,6 +130,16 @@ Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-
     Copy-Item -Path (Join-Path $_.FullName '*') -Destination $dest -Recurse -Force
 }
 
+# Move attachment folders from Publish to Published
+Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-Object {
+    $relative = $_.FullName.Substring($source.Length + 1)
+    $dest = Join-Path $published $relative
+    if (!(Test-Path $dest)) {
+        New-Item -ItemType Directory -Path $dest -Force
+    }
+    Move-Item -Path (Join-Path $_.FullName '*') -Destination $dest -Force
+}
+
 # Move published source files to Published folder
 Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $relative = $_.FullName.Substring($source.Length + 1)
