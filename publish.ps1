@@ -104,8 +104,10 @@ foreach ($group in ($groups.GetEnumerator() | Sort-Object Name)) {
     if ($group.Key -eq "uncategorized") {
         continue
     }
-    $heading = (Get-Culture).TextInfo.ToTitleCase($group.Key)
-    $index += "<h2>$heading</h2><ul>`n"
+    $parts = $group.Key.Split("\")
+    $parent = (Get-Culture).TextInfo.ToTitleCase($parts[0])
+    $child = if ($parts.Length -gt 1) { (Get-Culture).TextInfo.ToTitleCase($parts[1]) } else { $parent }
+    $index += "<p class='category-parent'>$parent</p><h2 class='category-child'>$child</h2><ul>`n"
     $index += ($group.Value -join "`n")
     $index += "`n</ul>`n"
 }
@@ -142,6 +144,9 @@ git add .
 git commit -m $COMMITMSG
 git push
 
+Write-Host ""
+Write-Host ""
+Write-Host ""
 Write-Host "Publish complete."
 Write-Host ""
 Write-Host "Reason:"

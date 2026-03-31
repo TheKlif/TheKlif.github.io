@@ -15,7 +15,7 @@ body {
 }
 
 .main-content {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -56,4 +56,17 @@ blockquote {
 body {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.category-parent {
+  font-size: 0.75rem;
+  color: #555;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.category-child {
+  margin-top: 0.25rem;
 }
