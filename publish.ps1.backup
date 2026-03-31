@@ -1,8 +1,7 @@
 # Publish script (markdown + auto index + dark styling)
-$source = "D:\Obsidian\Klif-Brain\50.08 - Is This Anything\Publish"
+$source = "D:\Obsidian\Klif-Brain\Publish"
 $site   = "D:\Is This Anything\TheKlif.github.io\Is-This-Anything"
 $backup = "D:\Is This Anything\Backups"
-$published = "D:\Obsidian\Klif-Brain\50.08 - Is This Anything\Published"
 $COMMITMSG = $env:COMMITMSG
 
 # Backup before doing anything
@@ -128,22 +127,10 @@ Get-ChildItem -Path $source -Recurse -Directory -Filter "attachments" | ForEach-
     Copy-Item -Path (Join-Path $_.FullName '*') -Destination $dest -Recurse -Force
 }
 
-# Move published source files to Published folder
-Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
-    $relative = $_.FullName.Substring($source.Length + 1)
-    $destFile = Join-Path $published $relative
-    $destDir = Split-Path $destFile
-    if (!(Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir -Force }
-    Move-Item -Path $_.FullName -Destination $destFile -Force
-}
-
 # Commit and push
 git add .
 git commit -m $COMMITMSG
 git push
 
 Write-Host "Publish complete."
-Write-Host ""
-Write-Host "Reason:"
-Write-Host $COMMITMSG
 pause
