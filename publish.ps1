@@ -42,6 +42,9 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         return "`n::: {.info}`n`n**$titleText**`n`n$body`n:::`n"
     })
 
+    # Fix image paths - strip everything before attachments/
+    $content = $content -replace '!\[\]\([^)]*attachments/', '![](attachments/'
+
     # Write converted content to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
     Set-Content -Path $temp -Value $content -Encoding UTF8
