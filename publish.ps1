@@ -151,4 +151,6 @@ Write-Host "Publish complete."
 Write-Host ""
 Write-Host "Reason:"
 Write-Host $COMMITMSG
-pause
+Write-Host ""
+Write-Host ""
+Write-Host ""
