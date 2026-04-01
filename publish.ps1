@@ -42,10 +42,16 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         return "`n::: {.info}`n`n**$titleText**`n`n$body`n:::`n"
     })
 
-    # Convert Obsidian wikilink image syntax to standard markdown
-    $content = $content -replace '!\[\[([^\]]+)\]\]', '![]($1)'
+    # Convert Obsidian wikilink image syntax to standard markdown, adding attachments/ prefix
+    $content = $content -replace '!\[\[([^\]]+)\]\]', '![](attachments/$1)'
     # Fix image paths - strip everything before attachments/
     $content = $content -replace '!\[\]\([^)]*attachments/', '![](attachments/'
+    # Encode spaces in image paths
+    $content = [regex]::Replace($content, '!\[\]\(([^)]+)\)', {
+        param($m)
+        $path = $m.Groups[1].Value -replace ' ', '%20'
+        return "![]($path)"
+    })
 
     # Write converted content to temp file for pandoc
     $temp = "$env:TEMP\publish_temp.md"
