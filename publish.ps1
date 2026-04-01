@@ -11,6 +11,23 @@ $backupDest = Join-Path $backup $timestamp
 Copy-Item -Path $site -Destination $backupDest -Recurse -Force
 Write-Host "Backup created: $backupDest"
 
+# Clean up old backups: keep last 30 days and last 30 pushes
+$allBackups = Get-ChildItem -Path $backup -Directory | Sort-Object CreationTime
+$cutoffDate = (Get-Date).AddDays(-30)
+$recentBackups = $allBackups | Where-Object { $_.CreationTime -ge $cutoffDate }
+$oldBackups = $allBackups | Where-Object { $_.CreationTime -lt $cutoffDate }
+# Keep at least 30 most recent regardless of age
+$keepCount = 30
+if ($allBackups.Count -gt $keepCount) {
+    $toDelete = $allBackups | Select-Object -First ($allBackups.Count - $keepCount)
+    foreach ($dir in $toDelete) {
+        if ($dir.CreationTime -lt $cutoffDate) {
+            Remove-Item -Path $dir.FullName -Recurse -Force
+            Write-Host "Deleted old backup: $($dir.Name)"
+        }
+    }
+}
+
 # Track conversion errors
 $publishErrors = @()
 
