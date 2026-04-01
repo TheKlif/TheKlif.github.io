@@ -46,6 +46,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $content = $content -replace '!\[\[([^\]]+)\]\]', '![](attachments/$1)'
     # Fix image paths - strip everything before attachments/
     $content = $content -replace '!\[\]\([^)]*attachments/', '![](attachments/'
+    # Add attachments/ prefix to bare filenames with no path
+    $content = $content -replace '!\[\]\((?!attachments/)([^/\)]+\.(png|jpg|jpeg|gif|webp))\)', '![](attachments/$1)'
     # Encode spaces in image paths
     $content = [regex]::Replace($content, '!\[\]\(([^)]+)\)', {
         param($m)
