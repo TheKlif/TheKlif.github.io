@@ -58,7 +58,7 @@ body {
   padding-right: 0 !important;
 }
 
-.category-parent {
+.category-parent, .last-updated {
   font-size: 0.75rem;
   color: #555;
   margin-bottom: 0;

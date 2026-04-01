@@ -142,7 +142,9 @@ foreach ($group in ($groups.GetEnumerator() | Sort-Object Name)) {
     $index += "`n</ul>`n"
 }
 
+$timestamp = Get-Date -Format "yyyy.MM.dd.HH.mm.ss"
 $index += @"
+<p class='last-updated'>Last updated: $timestamp</p>
 </div>
 </body>
 </html>
