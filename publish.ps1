@@ -42,6 +42,8 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
         return "`n::: {.info}`n`n**$titleText**`n`n$body`n:::`n"
     })
 
+    # Convert Obsidian wikilink image syntax to standard markdown
+    $content = $content -replace '!\[\[([^\]]+)\]\]', '![]($1)'
     # Fix image paths - strip everything before attachments/
     $content = $content -replace '!\[\]\([^)]*attachments/', '![](attachments/'
 
