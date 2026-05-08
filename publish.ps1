@@ -1,9 +1,8 @@
 # Publish script (markdown + auto index + dark styling)
 $source = "D:\Obsidian\Klif-Create\Is This Anything\Publish"
+$site   = "D:\Is This Anything\TheKlif.github.io\Is-This-Anything"
+$backup = "D:\Is This Anything\Backups"
 $published = "D:\Obsidian\Klif-Create\Is This Anything\Published"
-$site   = Join-Path $PSScriptRoot "TheKlif.github.io\Is-This-Anything"
-$backup = Join-Path $PSScriptRoot "Backups"
-
 $COMMITMSG = $env:COMMITMSG
 
 # Backup before doing anything
@@ -183,11 +182,9 @@ Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
 }
 
 # Commit and push
-Push-Location (Join-Path $PSScriptRoot "TheKlif.github.io")
 git add .
 git commit -m $COMMITMSG
 git push
-Pop-Location
 
 Write-Host ""
 Write-Host ""
