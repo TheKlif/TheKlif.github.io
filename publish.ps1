@@ -31,6 +31,11 @@ if ($allBackups.Count -gt $keepCount) {
 # Track conversion errors
 $publishErrors = @()
 
+# add the Publish folder if it doesn't already exist, so errors don't happen
+if (-not (Test-Path $source)) {
+    New-Item -ItemType Directory -Path $source | Out-Null
+}
+
 # Convert markdown to HTML (slugified, lowercase)
 Get-ChildItem -Path $source -Recurse -Include "*.md" | ForEach-Object {
     $relative = $_.FullName.Substring($source.Length + 1)
