@@ -12,10 +12,14 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 100px;
-      opacity: 0.15;
-      pointer-events: none;
+      width: 256px;
+      opacity: 0.25;
+      pointer-events: auto;
       z-index: 9999;
+      transition: opacity 0.2s ease;
+    }
+    .corner-watermark:hover {
+      opacity: 1;
     }
 
     body {
