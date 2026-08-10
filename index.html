@@ -1,105 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
-    <link rel="icon" type="image/x-icon" href="theklif.ico">
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="theklif.ico">
     <title>Klif's Start Page</title>
-    <style>
-    .corner-watermark {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 256px;
-      opacity: 0.25;
-      pointer-events: auto;
-      z-index: 9999;
-      transition: opacity 0.2s ease;
-    }
-    .corner-watermark:hover {
-      opacity: 1;
-    }
 
-    body {
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0 auto;
-      padding: 1em;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      display: flex;
-      flex-wrap: wrap; /* Allows columns to wrap on small screens */
-      justify-content: center; /* Center columns horizontally */
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-    .links {
-      text-align: left;
-      line-height: 2em;
-      font-size: 2em;
-      max-width: 33vw;
-      min-width: 250px;
-      padding-left: 2em;
-      box-sizing: border-box;
-      flex: 1 1 300px; /* Flexible for responsiveness */
-    }
-    a {
-      color: #f0f0f0;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #8ab4f8;
-    }
-    button {
-      background-color: #333;
-      color: #f0f0f0;
-      border: none;
-      padding: 0.5em 1em;
-      font-size: 1em;
-      cursor: pointer;
-      margin-top: 1em;
-      display: inline-block;
-    }
-    button:hover {
-      background-color: #444;
-    }
-    .spacer {
-      margin-top: 2em;
-    }
-    @media (max-width: 800px) {
-      .links {
-        max-width: 100%;
-        padding-left: 0;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg: #123524;
+        --text: #F0EBE0;
+        --accent: #FF8C42;
+        --link-hover: var(--accent);
       }
-    }
-  </style>
-    </head>
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        margin: 0 auto;
+        padding: 1em;
+        font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        font-weight: 600;
+        width: 100%;
+        text-align: center;
+        color: var(--text);
+        font-size: 1.5em;
+        letter-spacing: 0.02em;
+        margin: 0 0 0.5em;
+      }
+
+      .links {
+        text-align: left;
+        line-height: 2em;
+        font-size: 2em;
+        max-width: 33vw;
+        min-width: 250px;
+        padding-left: 2em;
+        flex: 1 1 300px;
+      }
+
+      a {
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        color: var(--link-hover);
+      }
+
+      .corner-watermark {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 256px;
+        opacity: 0.25;
+        pointer-events: auto;
+        z-index: 9999;
+        transition: opacity 0.2s ease;
+      }
+      .corner-watermark:hover {
+        opacity: 1;
+      }
+
+      @media (max-width: 800px) {
+        .links {
+          max-width: 100%;
+          padding-left: 0;
+        }
+      }
+    </style>
+  </head>
   <body>
-    <!-- Left column -->
-    <div class="links"> 
-      <a href="https://mail.google.com" target="_blank">Gmail</a><br>
-      <a href="https://ticktick.com/webapp/#p/inbox/tasks" target="_blank">TickTick</a><br>
-    <br>
-      <a href="https://calendar.google.com" target="_blank">Calendar</a><br>
-      <a href="https://www.messenger.com" target="_blank">Messenger</a><br>
-      <a href="https://simkl.com/7911940/tv/watching/" target="_blank">Simkl</a><br>
-      <a href="https://liteblue.usps.gov/wps/myportal/apps" target="_blank">LiteBlue</a><br>
-      <a href="https://claude.ai/" target="_blank">Claude</a><br>
-      <div class="spacer"></div>
-    <br>
-    </div>
-    <!-- Right column -->
-    <div class="links">
-      <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a><br>
-      <a href="https://www.puzzmo.com/today/" target="_blank">Puzzmo</a><br>
-    <br>
-      <a href="https://theklif.github.io/Is-This-Anything/">Is This Anything?</a><br>
-    <br>
-      <a href="https://beige.party/" target="_blank">Mastodon - Klif</a><br>
-      <a href="https://mstdn.party/" target="_blank">Mastodon - tuto</a><br>
-    </div>
+    <h1>Klif's Start Page</h1>
+
+    <div class="links" id="column-0"></div>
+    <div class="links" id="column-1"></div>
+
     <img src="theklif.ico" class="corner-watermark" alt="">
+
+    <script>
+      function escapeHtml(s) {
+        return s
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function buildColumnHTML(entries) {
+        return entries
+          .map(function (entry) {
+            if (entry.divider) {
+              return "<br>";
+            }
+            var target = entry.new_tab === false ? "" : ' target="_blank"';
+            return (
+              '<a href="' + escapeHtml(entry.url) + '"' + target + ">" +
+              escapeHtml(entry.label) + "</a><br>"
+            );
+          })
+          .join("");
+      }
+
+      fetch("links.json")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          data.columns.forEach(function (column, i) {
+            var el = document.getElementById("column-" + i);
+            if (el) {
+              el.innerHTML = buildColumnHTML(column);
+            }
+          });
+        })
+        .catch(function (err) {
+          console.error("Failed to load links.json:", err);
+        });
+    </script>
   </body>
 </html>

@@ -1,0 +1,23 @@
+{
+  "columns": [
+    [
+      {"label": "Gmail", "url": "https://mail.google.com"},
+      {"label": "TickTick", "url": "https://ticktick.com/webapp/#p/inbox/tasks"},
+      {"divider": true},
+      {"label": "Calendar", "url": "https://calendar.google.com"},
+      {"label": "Messenger", "url": "https://www.messenger.com"},
+      {"label": "Simkl", "url": "https://simkl.com/7911940/tv/watching/"},
+      {"label": "LiteBlue", "url": "https://liteblue.usps.gov/wps/myportal/apps"},
+      {"label": "Claude", "url": "https://claude.ai/"}
+    ],
+    [
+      {"label": "Wordle", "url": "https://www.nytimes.com/games/wordle/index.html"},
+      {"label": "Puzzmo", "url": "https://www.puzzmo.com/today/"},
+      {"divider": true},
+      {"label": "Is This Anything?", "url": "https://theklif.github.io/Is-This-Anything/", "new_tab": false},
+      {"divider": true},
+      {"label": "Mastodon - Klif", "url": "https://beige.party/"},
+      {"label": "Mastodon - tuto", "url": "https://mstdn.party/"}
+    ]
+  ]
+}
