@@ -52,8 +52,8 @@
       },
       {
         "label": "Is This Anything?",
-        "url": "https://theklif.github.io/Is-This-Anything/",
-        "new_tab": false
+        "url": "https://theklif.github.io/is-this-anything/index.html",
+        "new_tab": true
       },
       {
         "divider": true
