@@ -52,7 +52,6 @@
         text-align: left;
         line-height: 2em;
         font-size: 2em;
-        flex: 0 0 auto;
       }
 
       a {
@@ -85,16 +84,27 @@
           padding-left: 0;
         }
       }
+      .columns-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 3em;
+        width: 100%;
+      }
       #column-0 {
-        text-align: right;
+        justify-self: end;
+      }
+      #column-1 {
+        justify-self: start;
       }
     </style>
   </head>
   <body>
     <h1>Klif's Start Page</h1>
 
-    <div class="links" id="column-0"></div>
-    <div class="links" id="column-1"></div>
+    <div class="columns-wrapper">
+      <div class="links" id="column-0"></div>
+      <div class="links" id="column-1"></div>
+    </div>
 
     <img src="theklif.ico" class="corner-watermark" alt="">
 
