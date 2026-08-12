@@ -56,11 +56,21 @@
       a {
         color: var(--text);
         text-decoration: none;
+        display: inline-flex;
+        align-items: center;
       }
 
       a:hover {
         text-decoration: underline;
         color: var(--link-hover);
+      }
+
+      .favicon {
+        width: 1em;
+        height: 1em;
+        margin-right: 0.4em;
+        border-radius: 4px;
+        object-fit: contain;
       }
 
       .corner-watermark {
@@ -73,6 +83,7 @@
         z-index: 9999;
         transition: opacity 0.2s ease;
       }
+      
       .corner-watermark:hover {
         opacity: 1;
       }
@@ -83,9 +94,11 @@
         column-gap: 3em;
         width: 100%;
       }
+      
       #column-0 {
         justify-self: end;
       }
+      
       #column-1 {
         justify-self: start;
       }
@@ -135,13 +148,39 @@
               return "<br>";
             }
             var target = entry.new_tab === false ? "" : ' target="_blank"';
+            
+            var faviconHtml = "";
+            try {
+              var urlObj = new URL(entry.url);
+              var domain = urlObj.hostname;
+              var localFavicon = urlObj.origin + "/favicon.ico";
+              var googleFavicon = "https://www.google.com/s2/favicons?domain=" + domain + "&sz=32";
+              
+              faviconHtml = '<img class="favicon" loading="lazy" src="' + 
+                            escapeHtml(localFavicon) + 
+                            '" data-fallback="' + 
+                            escapeHtml(googleFavicon) + 
+                            '" alt="">';
+            } catch (e) {
+              // Ignore missing or relative URLs for favicon parsing
+            }
+
             return (
               '<a href="' + escapeHtml(entry.url) + '"' + target + ">" +
-              escapeHtml(entry.label) + "</a><br>"
+              faviconHtml + escapeHtml(entry.label) + "</a><br>"
             );
           })
           .join("");
       }
+
+      // Capture phase listener for image load errors to swap to fallback
+      document.addEventListener('error', function(e) {
+        var target = e.target;
+        if (target.tagName === 'IMG' && target.classList.contains('favicon') && target.dataset.fallback) {
+          target.src = target.dataset.fallback;
+          target.removeAttribute('data-fallback'); 
+        }
+      }, true);
 
       fetch("links.json")
         .then(function (response) {
