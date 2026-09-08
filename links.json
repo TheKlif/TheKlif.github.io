@@ -43,6 +43,16 @@
         "url": "https://www.puzzmo.com/today/"
       },
       {
+        "label": "Raddle",
+        "url": "https://raddle.quest/",
+        "new_tab": true
+      },
+      {
+        "label": "Ribbit",
+        "url": "https://www.yahoo.com/games/play/ribbit/",
+        "new_tab": true
+      },
+      {
         "label": "MapTap.gg",
         "url": "https://maptap.gg",
         "new_tab": true
