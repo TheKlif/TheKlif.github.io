@@ -105,7 +105,10 @@ def action_add(data):
     if not url:
         print("URL can't be empty. Cancelled.")
         return
-    same_tab = input("Open in the same tab instead of a new one? (y/N): ").strip().lower() == "y"
+    same_tab = (
+        input("Open in the same tab instead of a new one? (y/N): ").strip().lower()
+        == "y"
+    )
     entry = {"label": label, "url": url, "new_tab": not same_tab}
     data["columns"][col].append(entry)
     save_links(data)
@@ -153,7 +156,9 @@ def action_edit(data):
     if new_url:
         entry["url"] = new_url
     tab_now = "same tab" if entry.get("new_tab", True) is False else "new tab"
-    change_tab = input(f"Currently opens in a {tab_now}. Switch? (y/N): ").strip().lower() == "y"
+    change_tab = (
+        input(f"Currently opens in a {tab_now}. Switch? (y/N): ").strip().lower() == "y"
+    )
     if change_tab:
         entry["new_tab"] = not entry.get("new_tab", True)
     save_links(data)
@@ -169,7 +174,9 @@ def wait_before_exit(timeout=5):
     try:
         if not sys.stdout.isatty() or msvcrt is None:
             return
-        print(f"\nDone. Press any key within {timeout} seconds to keep this window open...")
+        print(
+            f"\nDone. Press any key within {timeout} seconds to keep this window open..."
+        )
         start = time.time()
         while time.time() - start < timeout:
             if msvcrt.kbhit():
